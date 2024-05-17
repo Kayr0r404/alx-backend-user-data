@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Task 1: log Class"""
 
 import re
 import logging
@@ -17,6 +18,7 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
+        """format log record to string"""
         message = record.getMessage().split(self.SEPARATOR)
         filtered = filter_datum(
             self.fields,
@@ -31,6 +33,7 @@ class RedactingFormatter(logging.Formatter):
 
 
 def filter_datum(fields, redaction, message, separator):
+    """returns the log message obfuscated:"""
     message_list = message.split(separator)
     for field in message_list:
         if field.split("=")[0] in fields:
