@@ -20,17 +20,9 @@ class RedactingFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         """format log record to string"""
-        message = record.getMessage().split(self.SEPARATOR)
-        filtered = filter_datum(
-            self.fields,
-            self.REDACTION,
-            f"{self.SEPARATOR} ".join(message),
-            self.SEPARATOR,
-        )
-        timestamp = datetime.utcfromtimestamp(record.created).strftime(
-            "%Y-%m-%d %H:%M:%S"
-        )
-        return f"[HOLBERTON] {record.name} INFO {timestamp} {filtered}"
+        msg = super(RedactingFormatter, self).format(record)
+        txt = filter_datum(self.fields, self.REDACTION, msg, self.SEPARATOR)
+        return txt
 
 
 def filter_datum(
