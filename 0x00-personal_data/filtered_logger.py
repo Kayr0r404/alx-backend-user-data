@@ -4,6 +4,7 @@
 import re
 import logging
 from datetime import datetime
+from typing import List
 
 
 class RedactingFormatter(logging.Formatter):
@@ -32,7 +33,12 @@ class RedactingFormatter(logging.Formatter):
         return f"[HOLBERTON] {record.name} INFO {timestamp} {filtered}"
 
 
-def filter_datum(fields, redaction, message, separator):
+def filter_datum(
+    fields: List[str],
+    redaction: str,
+    message: str,
+    separator: str,
+) -> str:
     """returns the log message obfuscated:"""
     message_list = message.split(separator)
     for field in message_list:
