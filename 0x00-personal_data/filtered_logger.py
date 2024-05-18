@@ -3,7 +3,6 @@
 
 import re
 import logging
-from datetime import datetime
 from typing import List
 
 
@@ -40,11 +39,3 @@ def filter_datum(
             )
 
     return separator.join(message_list)
-
-
-filter_datum(
-    ["password", "date_of_birth"],
-    "xxxx",
-    "name=egg;email=eggmin@eggsample.com;password=eggcellent;date_of_birth=12/12/198",
-    ";",
-)
