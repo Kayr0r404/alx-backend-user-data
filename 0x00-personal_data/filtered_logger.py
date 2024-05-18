@@ -19,8 +19,8 @@ class RedactingFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         """format log record to string"""
-        msg = super(RedactingFormatter, self).format(record)
-        txt = filter_datum(self.fields, self.REDACTION, msg, self.SEPARATOR)
+        msg: str = super(RedactingFormatter, self).format(record)
+        txt: str = filter_datum(self.fields, self.REDACTION, msg, self.SEPARATOR)
         return txt
 
 
@@ -31,7 +31,7 @@ def filter_datum(
     separator: str,
 ) -> str:
     """returns the log message obfuscated:"""
-    message_list = message.split(separator)
+    message_list: list = message.split(separator)
     for field in message_list:
         if field.split("=")[0] in fields:
             message_list[message_list.index(field)] = re.sub(
