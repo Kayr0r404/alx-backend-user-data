@@ -39,7 +39,7 @@ def filter_datum(
                 "^" + field, field.split("=")[0] + "=" + redaction, field
             )
 
-    return separator.join(message_list)
+    return (separator + " ").join(message_list)
 
 
 filter_datum(
